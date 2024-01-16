@@ -1,9 +1,13 @@
 import './App.css';
 
+import StartGame from './components/StartGame';
+
 function App() {
   return (
     <div className="App">
-        <h2 className='title'>Palavra Secreta</h2>
+        
+
+        <StartGame />
     </div>
   );
 }
