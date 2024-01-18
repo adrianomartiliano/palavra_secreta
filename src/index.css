@@ -14,12 +14,13 @@ body{
 
 
 button {
-  padding: 10px;
-  border-radius: 20px;
+  font-size: 30px;
+  padding: 30px;
+  border-radius: 60px;
   cursor: pointer;
   background: linear-gradient(60deg, rgb(218, 95, 95) 0%, rgb(255, 238, 3));
   box-shadow: 1px 1px 5px rgb(61, 61, 61);
-  transition: .5s;
+  transition: .7s;
   color: rgb(61, 61, 61);
   font-weight: 800;
   border: 1px solid rgb(63, 63, 63);
