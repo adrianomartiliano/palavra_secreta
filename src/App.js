@@ -20,30 +20,48 @@ const estagios = [
 
 function App() {
 
-  const [estagioJogo, setEstagioJogo] = useState(estagios[0].name);
-  const [palavra] = useState(palavras);
-  
-  //Mudando o estagio do jogo (Iniciando)
-  const Iniciando = () => {
-    setEstagioJogo(estagios[1].name);
+  const palavaEcategoria = () => {
+    const categorias = Object.keys(palavras);
+    const categoria = categorias[Math.floor(Math.random() * categorias.length)];
+    const palavra = palavras[categoria][Math.floor(Math.random() * palavras[categoria].length)];
+    
+    return { categoria, palavra };
   }
 
-  //Verifica se a palavra foi acertada
+  const [estagioJogo, setEstagioJogo] = useState(estagios[0].name);
+  const [palavraEscolhida, setPalavraEscolhida] = useState("");
+  const [categoriaEscolhida, setCategoriaEscolhida] = useState("");
+  const [letras, setLetras] = useState("");
+
+  const Iniciando = () => {
+    const { categoria, palavra } = palavaEcategoria();
+    setEstagioJogo(estagios[1].name);
+    setPalavraEscolhida(palavra);
+    setCategoriaEscolhida(categoria);
+
+
+    //Criando array de letras
+    let listLetras = palavra.split("");
+
+    console.log(categoria);
+    console.log(listLetras);
+
+
+  }
+
   const VerificaPalavra = () => {
     setEstagioJogo(estagios[2].name);
   }
 
-  //Reinicia o jogo
   const Reset = () => {
     setEstagioJogo(estagios[0].name);
   }
 
   return (
     <div className="App">
-        
-      {estagioJogo === "inicio" && <StartGame Iniciando={ Iniciando } />}
-      {estagioJogo === "jogando" && <Jogando VerificaPalavra={ VerificaPalavra }/>}
-      {estagioJogo === "fim" && <Fimdejogo Reset={ Reset }/>}
+      {estagioJogo === "inicio" && <StartGame Iniciando={Iniciando} />}
+      {estagioJogo === "jogando" && <Jogando VerificaPalavra={VerificaPalavra} />}
+      {estagioJogo === "fim" && <Fimdejogo Reset={Reset} />}
     </div>
   );
 }
