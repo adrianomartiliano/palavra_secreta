@@ -1,11 +1,11 @@
 import "./startgame.css";
 
-const StartGame = () => {
+const StartGame = ({Iniciando}) => {
 
     return (
         <div>
             <h2 className='title'>Palavra Secreta</h2>
-            <button>COMEÇAR O JOGO</button>
+            <button onClick={Iniciando}>COMEÇAR O JOGO</button>
         </div>
     )
 
