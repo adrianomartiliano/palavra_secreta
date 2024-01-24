@@ -43,6 +43,7 @@ function App() {
     //Criando array de letras
     let listLetras = palavra.split("");
 
+    setCategoriaEscolhida(categoria);
     console.log(categoria);
     console.log(listLetras);
 
@@ -60,7 +61,7 @@ function App() {
   return (
     <div className="App">
       {estagioJogo === "inicio" && <StartGame Iniciando={Iniciando} />}
-      {estagioJogo === "jogando" && <Jogando VerificaPalavra={VerificaPalavra} />}
+      {estagioJogo === "jogando" && <Jogando VerificaPalavra={VerificaPalavra} categoria={ categoriaEscolhida }/>}
       {estagioJogo === "fim" && <Fimdejogo Reset={Reset} />}
     </div>
   );
