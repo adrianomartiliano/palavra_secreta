@@ -1,26 +1,36 @@
 import React from "react";
 import "./jogando.css";
 
-const Jogando = ( { VerificaPalavra, categoriaEscolhida }) => {
+const Jogando = ( { 
+    VerificaPalavra, 
+    categoria,
+    letrasAcertadas, 
+    letrasErradas,
+    pontuacao,
+    tentativas, 
+    letras
+}) => {
 
-    const categoria = categoriaEscolhida;
-    //console.log(categoria);
     return(
         <div className="jogando">
             <p className="pontuacao">
-                Pontuação: <span>000</span>
+                Pontuação: <span>{pontuacao}</span>
             </p>
-            <h3>Dica sobre a palavra: <span className="dica">Dica{categoria}</span></h3>
+            <h3>Dica sobre a palavra: <span className="dica">{categoria}</span></h3>
+            <p>Tentativas restantes: <span>{tentativas}</span></p>
 
             <div className="containerPalavra">
-                <span className="letra">A</span>
-                <span className="vazio"></span>
-                <span className="vazio"></span>
-                <span className="vazio"></span>
-                <span className="vazio"></span>
-                <span className="vazio"></span>
+                {letras.map((letras, i) =>(
+                    letrasAcertadas.includes(letras) ? (
+                        <span key={i} className="letra">
+                            {letras[i]}
+                        </span>
+                    ) : (
+                        <span key={i} className="vazio"></span>
+                    )
+                ))}
+                
             </div>
-
             <div className="containerLetra">
                 <p>Acerte a letra...</p>
                 <form>

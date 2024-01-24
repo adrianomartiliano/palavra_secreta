@@ -20,6 +20,16 @@ const estagios = [
 
 function App() {
 
+  const [estagioJogo, setEstagioJogo] = useState(estagios[0].name);
+  const [palavraEscolhida, setPalavraEscolhida] = useState("");
+  const [categoriaEscolhida, setCategoriaEscolhida] = useState("");
+  const [letras, setLetras] = useState("");
+
+  const [letrasAcertadas, setLetrasAcertadas] = useState([]);
+  const [letrasErradas, setLetrasErradas] = useState([]);
+  const [tentativas, setTentativas] = useState(3);
+  const [pontuacao, setPontuacao] = useState(0);
+
   const palavaEcategoria = () => {
     const categorias = Object.keys(palavras);
     const categoria = categorias[Math.floor(Math.random() * categorias.length)];
@@ -27,11 +37,6 @@ function App() {
     
     return { categoria, palavra };
   }
-
-  const [estagioJogo, setEstagioJogo] = useState(estagios[0].name);
-  const [palavraEscolhida, setPalavraEscolhida] = useState("");
-  const [categoriaEscolhida, setCategoriaEscolhida] = useState("");
-  const [letras, setLetras] = useState("");
 
   const Iniciando = () => {
     const { categoria, palavra } = palavaEcategoria();
@@ -44,10 +49,7 @@ function App() {
     let listLetras = palavra.split("");
 
     setCategoriaEscolhida(categoria);
-    console.log(categoria);
-    console.log(listLetras);
-
-
+    setLetras(listLetras);
   }
 
   const VerificaPalavra = () => {
@@ -61,7 +63,16 @@ function App() {
   return (
     <div className="App">
       {estagioJogo === "inicio" && <StartGame Iniciando={Iniciando} />}
-      {estagioJogo === "jogando" && <Jogando VerificaPalavra={VerificaPalavra} categoria={ categoriaEscolhida }/>}
+      {estagioJogo === "jogando" && <Jogando 
+                                        VerificaPalavra={ VerificaPalavra } 
+                                        categoria={ categoriaEscolhida }
+                                        palavra={ palavraEscolhida }
+                                        letrasAcertadas={ letrasAcertadas}
+                                        letrasErradas={ letrasErradas }
+                                        pontuacao={ pontuacao }
+                                        tentativas={ tentativas }
+                                        letras = { letras}
+                                        />}
       {estagioJogo === "fim" && <Fimdejogo Reset={Reset} />}
     </div>
   );
