@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import "./jogando.css";
 
 const Jogando = ( { 
@@ -11,6 +11,16 @@ const Jogando = ( {
     letras
 }) => {
 
+    const [letra, setLetra] = useState("");
+    const [letraInputRef, setLetraInputRef] = useState(null)
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        VerificaPalavra(letra)
+        setLetra("")
+    }
+
     return(
         <div className="jogando">
             <p className="pontuacao">
@@ -20,10 +30,10 @@ const Jogando = ( {
             <p>Tentativas restantes: <span>{tentativas}</span></p>
 
             <div className="containerPalavra">
-                {letras.map((letras, i) =>(
-                    letrasAcertadas.includes(letras) ? (
+                {letras.map((letraAtual, i) =>(
+                    letrasAcertadas.includes(letraAtual) ? (
                         <span key={i} className="letra">
-                            {letras[i]}
+                            {letraAtual}
                         </span>
                     ) : (
                         <span key={i} className="vazio"></span>
@@ -33,17 +43,23 @@ const Jogando = ( {
             </div>
             <div className="containerLetra">
                 <p>Acerte a letra...</p>
-                <form>
-                    <input type="text" name="letra" maxLength="1" required/>
+                <form onSubmit={handleSubmit}>
+                    <input 
+                        type="text" 
+                        name="letra" 
+                        maxLength="1" 
+                        required
+                        onChange={(e) => setLetra(e.target.value) }
+                        value={letra}
+                        ref={letraInputRef}
+                    
+                    />
                     <button className="btnOk">Verificar</button>
                 </form>
             </div>
 
             <div className="letrasErradas">
-                <p>Letras utilizadas:
-                    <span>a, </span>
-                    <span>b, </span>
-                </p>
+                <p>Letras utilizadas: {letrasErradas.join(', ')}</p>
             </div>
         </div>
     );

@@ -48,15 +48,65 @@ function App() {
     //Criando array de letras
     let listLetras = palavra.split("");
 
+    listLetras = listLetras.map((l) => l.toLowerCase());
+
     setCategoriaEscolhida(categoria);
     setLetras(listLetras);
   }
 
-  const VerificaPalavra = () => {
-    setEstagioJogo(estagios[2].name);
+  const VerificaPalavra = (letra) => {
+   
+    const verificaLetra = letra.toLowerCase();
+
+    if(
+      letrasAcertadas.includes(verificaLetra) ||
+      letrasErradas.includes(verificaLetra)
+    ){
+      return;
+    }
+
+    if(letras.includes(verificaLetra)){
+      setLetrasAcertadas((actualLetrasAcertadas)=>[
+        ...actualLetrasAcertadas,
+        verificaLetra
+      ])
+    } else {
+      setLetrasErradas((actualLetrasErradas)=>[
+        ...actualLetrasErradas,
+        verificaLetra
+      ])
+        if (tentativas > 1){
+          setTentativas(tentativas-1)
+        } else {
+          setEstagioJogo(estagios[2].name)
+        }
+      
+      
+    }
+
   }
+  console.log(palavraEscolhida)
+  useEffect(()=>{
+
+    const letrasUnicas = [... new Set(letras)]
+
+    if (letrasAcertadas.length === letrasUnicas.length) {
+      setPontuacao((pontuacaoAtual) => pontuacaoAtual + 100)
+      setLetrasAcertadas([])
+      setLetrasErradas([])
+
+      Iniciando();
+
+    }
+
+  }, [letrasAcertadas])
 
   const Reset = () => {
+    setLetrasAcertadas([])
+    setLetrasErradas([])
+    setTentativas(3)
+    setPontuacao(0)
+    
     setEstagioJogo(estagios[0].name);
   }
 
