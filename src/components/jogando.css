@@ -17,11 +17,11 @@ h3{
 }
 
 .containerPalavra{
+    padding: 10px;
     margin: 20px;
     border: 5px solid rgb(61, 61, 61);
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
     text-align: center;
 }
 

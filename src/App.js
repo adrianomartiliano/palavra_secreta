@@ -123,7 +123,7 @@ function App() {
                                         tentativas={ tentativas }
                                         letras = { letras}
                                         />}
-      {estagioJogo === "fim" && <Fimdejogo Reset={Reset} />}
+      {estagioJogo === "fim" && <Fimdejogo Reset={Reset} pontuacao={pontuacao}/>}
     </div>
   );
 }
